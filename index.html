@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Spreadsheet with Calculations</title>
+    <style>
+        html {
+            margin: 0;
+            padding: 0;
+            max-height: 600px;
+            /* overflow: auto; */
+            /* overflow: scroll; */
+        }
+
+        #spreadsheet {
+            border: 1px solid #000;
+            margin-top: 0px;
+        }
+
+        #stats {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border: 1px solid #000;
+
+        }
+
+        .container {
+            display: flex;
+         
+            justify-content: space-between;
+            align-items: center;
+            width: 99%;
+            height: 75px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        #crudoperations {
+            display: flex;
+        }
+
+        #UploadButton {
+            margin-left: auto;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-left: 10px;
+            text-decoration: none;
+
+        }
+
+        button a {
+            text-decoration: none;
+        }
+        .canva {
+            margin-top: 100px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div id="crudoperations">
+            <button>Add</button>
+            <button>Update</button>
+            <button>Delete</button>
+        </div>
+        <div id="UploadButton"><button><a href="fileUploader.html">UploadFile</a></button></div>
+    </div>
+
+    <div class="canva">
+        <canvas id="spreadsheet"></canvas>
+        <div id="stats"></div>
+    </div>
+    <input type="text" id="cellInput" style="position: absolute; display: none;">
+    <script src="script.js">
+
+    </script>
+    <script>
+
+    </script>
+</body>
+
+</html>
