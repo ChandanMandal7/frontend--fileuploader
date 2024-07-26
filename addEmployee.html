@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .form-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .form-title {
+            text-align: center;
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form input {
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .form input:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+        }
+
+        .form button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form-container">
+        <h2 class="form-title"> Add Employee Information</h2>
+        <form id="employeeForm" class="form">
+            <input type="email" name="EmailId" placeholder="Email" required>
+            <input type="text" name="Name" placeholder="Name" required>
+            <input type="text" name="Country" placeholder="Country" required>
+            <input type="text" name="State" placeholder="State" required>
+            <input type="text" name="City" placeholder="City" required>
+            <input type="tel" name="TelephoneNumber" placeholder="Telephone Number" required>
+            <input type="text" name="AddressLine1" placeholder="Address Line 1" required>
+            <input type="text" name="AddressLine2" placeholder="Address Line 2">
+            <input type="date" name="DateOfBirth" required>
+            <input type="number" name="GrossSalaryFY2019_20" placeholder="Gross Salary FY2019-20" required>
+            <input type="number" name="GrossSalaryFY2020_21" placeholder="Gross Salary FY2020-21" required>
+            <input type="number" name="GrossSalaryFY2021_22" placeholder="Gross Salary FY2021-22" required>
+            <input type="number" name="GrossSalaryFY2022_23" placeholder="Gross Salary FY2022-23" required>
+            <input type="number" name="GrossSalaryFY2023_24" placeholder="Gross Salary FY2023-24" required>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('employeeForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            const jsonData = Object.fromEntries(formData.entries());
+
+            fetch('http://localhost:5006/api/Crud', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(jsonData)
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.text().then(text => {
+                            throw new Error(text || 'Network response was not ok');
+                        });
+                    }
+                    return response.text().then(text => {
+                        try {
+                            return JSON.parse(text);
+                        } catch (e) {
+                            return text;
+                        }
+                    });
+                })
+                .then(data => {
+
+                    alert('Employee added successfully');
+                    this.reset();
+
+                    setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 500);
+
+
+
+                })
+                .catch(error => {
+
+                    alert('Error adding employee: ' + error.message);
+                });
+        });
+    </script>
+</body>
+
+</html>
